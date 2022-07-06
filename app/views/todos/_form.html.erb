@@ -1,22 +1,25 @@
-<div class="px-[30%] py-[5%] w-full space-y-4 h-full flex flex-col justify-center">
-  <div>
-    <h1 class="font-bold text-2xl mb-3">
-      <%= header_text %>
-    </h1>
-   
-    <%= form_with(model: todo, class: "contents") do |form| %>
-      <% if todo.errors.any? %>
-        <div id="error_explanation" class="fixed top-0 bg-red-500 px-2 py-1 rounded-[6px] w-full text-white text-sm h-fit flex flex-col" id="notice">
-          <h2 class="font-bold">
-            <%= pluralize(todo.errors.count, "error") %> prohibited this todo from being saved:
-          </h2>
-          <% todo.errors.each do |error| %>
-            <p>
-              <%= error.full_message %>
-            </p>
-          <% end %>
-        </div>
-      <% end %>
+<%= form_with(model: todo, class: "contents") do |form| %>
+  <% if todo.errors.any? %>
+    <div id="error_explanation" class="fixed bg-red-500 px-2 py-1 w-full text-white text-sm h-fit flex flex-row" id="notice">
+      <div class="ml-1 flex flex-col">
+        <h2 class="font-bold">
+          <%= pluralize(todo.errors.count, "error") %> prohibited this todo from being saved
+        </h2>
+        <% todo.errors.each do |error| %>
+          <p class="text-sm">
+            <%= error.full_message %>
+          </p>
+        <% end %>
+      </div>
+      <button class="mr-1 ml-auto hover:text-gray-100" onclick="document.querySelector('#error_explanation').remove()">Close</button>
+    </div>
+  <% end %>
+
+  <div class="px-[30%] py-[5%] w-full space-y-4 h-full flex flex-col justify-center">
+    <div>
+      <h1 class="font-bold text-2xl mb-3">
+        <%= header_text %>
+      </h1>
     
       <div class="p-0 flex flex-row">
         <div class="flex flex-col space-y-3">
@@ -34,6 +37,6 @@
         <%= link_to failure_text, todos_path, class: "rounded-lg px-2 py-1 text-sm bg-gray-50 text-black block mt-auto hover:bg-gray-100 duration-75" %>
         <%= form.submit success_text, class: "rounded-lg px-2 py-1 text-sm bg-blue-600 text-white block mt-auto hover:bg-blue-700 duration-75" %>
       </div>
-    <% end %>
+    </div>
   </div>
-</div>
+<% end %>

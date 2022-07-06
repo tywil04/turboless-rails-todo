@@ -28,7 +28,7 @@ class TodosController < ApplicationController
 
     respond_to do |format|
       if @todo.save
-        format.html { redirect_to todos_path }
+        format.html { redirect_to todos_path, notice: "Successfuly Created Todo: " + @todo.title }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @todo.errors, status: :unprocessable_entity }
@@ -40,7 +40,7 @@ class TodosController < ApplicationController
   def update
     respond_to do |format|
       if @todo.update(todo_params)
-        format.html { redirect_to todos_path }
+        format.html { redirect_to todos_path, notice: "Successfully Updated Todo: " + @todo.title }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @todo.errors, status: :unprocessable_entity }
@@ -53,7 +53,7 @@ class TodosController < ApplicationController
     @todo.destroy
 
     respond_to do |format|
-      format.html { redirect_to todos_url }
+      format.html { redirect_to todos_url, notice: "Succesfully Deleted Todo: " + @todo.title }
       format.json { head :no_content }
     end
   end
