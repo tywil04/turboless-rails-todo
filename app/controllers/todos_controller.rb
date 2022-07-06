@@ -3,14 +3,8 @@ class TodosController < ApplicationController
 
   # GET /todos or /todos.json
   def index
-    @todos = Todo.all
-  end
-
-  # GET /todos/1 or /todos/1.json
-  def show
-    respond_to do |format|
-      format.html { redirect_to todos_path }
-    end
+    @todos = Todo.all.select { |todo| !todo.completed }
+    @completed_todos = Todo.all.select { |todo| todo.completed }
   end
 
   # GET /todos/new
@@ -39,6 +33,7 @@ class TodosController < ApplicationController
   # PATCH/PUT /todos/1 or /todos/1.json
   def update
     respond_to do |format|
+      puts todo_params
       if @todo.update(todo_params)
         format.html { redirect_to todos_path, notice: "Successfully Updated Todo: " + @todo.title }
       else
@@ -66,6 +61,6 @@ class TodosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def todo_params
-      params.require(:todo).permit(:title, :body)
+      params.require(:todo).permit(:title, :body, :completed)
     end
 end

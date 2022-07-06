@@ -1,10 +1,15 @@
-<div id="<%= dom_id todo %>" class="border border-gray-100 bg-gray-50 h-fit rounded-[6px] px-3 py-3 !w-full group">
+<div id="<%= dom_id todo %>" class="border border-gray-100 bg-gray-50 h-fit rounded-[6px] px-3 py-3 !w-full group dark:text-white dark:border-gray-700 dark:bg-gray-800">
   <div class="flex flex-row mb-1">
-    <h1 class="duration-75 font-bold text-base mr-auto">
+    <h1 class="font-bold text-base mr-auto dark:text-white">
       <%= todo.title %>
     </h1>
 
     <div class="space-x-0.5 flex flex-row ml-auto opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto duration-75">
+      <%= form_with(model: todo) do |form| %>
+        <%= form.hidden_field :completed, value: !completed %>
+        <%= form.submit completed ? "Uncomplete": "Complete", class: "leading-normal duration-75 rounded-[6px] text-gray-500 hover:text-white hover:bg-gray-600 text-sm px-1.5 py-0.5 h-fit m-0 text-center cursor-pointer dark:text-gray-300 dark:hover:bg-gray-50 dark:hover:text-black" %>
+      <% end %>
+
       <%= link_to "Edit", edit_todo_path(todo), class: "leading-normal align-middle duration-75 rounded-[6px] text-yellow-500 hover:text-white hover:bg-yellow-500 text-sm px-1.5 py-0.5 h-fit m-0 text-center" %>
       <%= button_to "Delete", todo, class: "leading-normal duration-75 rounded-[6px] text-red-500 hover:text-white hover:bg-red-500 text-sm px-1.5 py-0.5 h-fit m-0 text-center", method: :delete %>
     </div>
