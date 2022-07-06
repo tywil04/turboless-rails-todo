@@ -16,6 +16,13 @@ class TodosController < ApplicationController
   def edit
   end
 
+  # GEt /todos/1
+  def show
+    respond_to do |format|
+      format.html { redirect_to todos_path }
+    end
+  end
+
   # POST /todos or /todos.json
   def create
     @todo = Todo.new(todo_params)
