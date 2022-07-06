@@ -1,0 +1,22 @@
+<div id="<%= dom_id todo %>" class="border border-gray-100 bg-gray-50 h-fit rounded-[6px] px-3 py-3 !w-full group">
+  <div class="flex flex-row mb-1">
+    <h1 class="duration-75 font-bold text-base mr-auto">
+      <%= todo.title %>
+    </h1>
+
+    <div class="space-x-0.5 flex flex-row ml-auto opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto duration-75">
+      <%= link_to "Edit", edit_todo_path(todo), class: "leading-normal align-middle duration-75 rounded-[6px] text-yellow-500 hover:text-white hover:bg-yellow-500 text-sm px-1.5 py-0.5 h-fit m-0 text-center" %>
+      <%= button_to "Delete", todo, class: "leading-normal duration-75 rounded-[6px] text-red-500 hover:text-white hover:bg-red-500 text-sm px-1.5 py-0.5 h-fit m-0 text-center", method: :delete %>
+    </div>
+  </div>
+
+  <p class="text-xs">
+    <%= todo.body %>
+  </p>
+
+  <% if action_name != "show" and action_name != "index" %>
+    <%= link_to "Show this todo", todo, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this todo', edit_todo_path(todo), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>

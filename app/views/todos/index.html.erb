@@ -1,0 +1,10 @@
+<div class="px-[30%] py-[5%] w-full space-y-3">
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl">Todos</h1>
+    <%= link_to 'New', new_todo_path, class: "rounded-lg px-2 py-1 text-sm bg-blue-600 text-white block mt-auto hover:bg-blue-700 duration-75" %>
+  </div>
+
+  <div id="todos" class="w-full space-y-4">
+    <%= render @todos %>
+  </div>
+</div>
