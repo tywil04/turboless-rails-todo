@@ -1,0 +1,29 @@
+<div class="px-[30%] py-[5%] w-full space-y-4 h-full dark:bg-gray-900">
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |form| %>
+    <h1 class="font-bold text-2xl mb-3 dark:text-white">
+      Log in
+    </h1>
+  
+    <div class="p-0 flex flex-row">
+      <div class="flex flex-col space-y-3">
+        <%= form.label "Email:", class: "h-[26px] pl-0.5 pr-1.5 py-0.5 mt-[1px] mr-2 text-sm dark:text-white" %>
+        <%= form.label "Password:", class: "h-[26px] pl-0.5 pr-1.5 py-0.5 mt-[1px] mr-2 text-sm dark:text-white" %>
+        <%= form.label "Remember Me:", class: "h-[26px] pl-0.5 pr-1.5 py-0.5 mt-[1px] mr-2 text-sm dark:text-white" %>
+      </div>
+  
+      <div class="flex flex-col space-y-3 flex-grow">
+        <%= form.email_field :email, autofocus: true, autocomplete: "email", class: "text-sm w-full h-fit px-1.5 py-0.5 bg-gray-50 border border-gray-100 rounded-[6px] duration-75 focus:ring-0 focus:ring-offset-0 focus:outline-none dark:text-white dark:bg-gray-800 dark:border-gray-700" %>  
+        <%= form.password_field :password, autocomplete: "current-password", class: "text-sm w-full h-fit px-1.5 py-0.5 bg-gray-50 border border-gray-100 rounded-[6px] duration-75 focus:ring-0 focus:ring-offset-0 focus:outline-none dark:text-white dark:bg-gray-800 dark:border-gray-700" %>
+        <%= form.check_box :remember_me, class: "h-[26px] w-[26px] rounded-[4px] bg-transparent duration-75" %>
+      </div>
+    </div>
+  
+    <div class="float-left mt-3 flex flex-row">
+      <%= link_to "Dont have an account? Sign up.", new_user_registration_path, class: "rounded-lg py-1 px-0.5 text-sm block mt-auto hover:opacity-75 duration-75 text-gray-400 cursor-pointer"%>
+    </div>
+
+    <div class="float-right mt-3 flex flex-row">
+      <%= form.submit "Log in", class: "rounded-lg px-2 py-1 text-sm bg-blue-600 text-white block mt-auto hover:bg-blue-700 duration-75 cursor-pointer" %>
+    </div>
+  <% end %>
+</div>

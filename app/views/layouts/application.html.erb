@@ -13,6 +13,24 @@
 
   <body>
     <main class="h-[100vh] w-[100vw]">
+      <% if notice != nil %>
+        <div class="notice fixed bg-green-500 px-2 py-1 w-full text-white text-sm h-fit flex flex-row" id="notice">
+          <p class="ml-1 text-sm mr-auto">
+            <%= notice %>
+          </p>
+          <button class="mr-1 ml-auto hover:text-gray-100" onclick="document.querySelector('.notice').remove()">Close</button>
+        </div>
+      <% end %>
+
+      <% if alert != nil %>
+        <div class="alert fixed bg-blue-500 px-2 py-1 w-full text-white text-sm h-fit flex flex-row" id="notice">
+          <p class="ml-1 text-sm mr-auto">
+            <%= alert %>
+          </p>
+          <button class="mr-1 ml-auto hover:text-gray-100" onclick="document.querySelector('.alert').remove()">Close</button>
+        </div>
+      <% end %>
+
       <%= yield %>
     </main>
   </body>

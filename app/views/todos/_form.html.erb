@@ -22,19 +22,19 @@
   
     <div class="p-0 flex flex-row">
       <div class="flex flex-col space-y-3">
-        <%= form.label "Title:", class: "pl-0.5 pr-1.5 py-0.5 mt-[1px] mr-2 text-sm dark:text-white" %>
-        <%= form.label "Description:", class: "pl-0.5 pr-1.5 py-0.5 mt-[1px] mr-2 text-sm dark:text-white" %>
+        <%= form.label "Title:", class: "h-[26px] pl-0.5 pr-1.5 py-0.5 mt-[1px] mr-2 text-sm dark:text-white" %>
+        <%= form.label "Description:", class: "h-[26px] pl-0.5 pr-1.5 py-0.5 mt-[1px] mr-2 text-sm dark:text-white" %>
       </div>
   
       <div class="flex flex-col space-y-3 flex-grow">
-        <%= form.text_field :title, class: "text-sm w-full h-fit px-1.5 py-0.5 bg-gray-50 border border-gray-100 rounded-[6px] duration-75 focus:ring-0 focus:ring-offset-0 focus:outline-none dark:text-white dark:bg-gray-800 dark:border-gray-700" %>  
+        <%= form.text_field :title, autofocus: true, class: "text-sm w-full h-fit px-1.5 py-0.5 bg-gray-50 border border-gray-100 rounded-[6px] duration-75 focus:ring-0 focus:ring-offset-0 focus:outline-none dark:text-white dark:bg-gray-800 dark:border-gray-700" %>  
         <%= form.text_area :body, class: "text-sm w-full h-fit px-1.5 py-0.5 bg-gray-50 border border-gray-100 rounded-[6px] duration-75 focus:ring-0 focus:ring-offset-0 focus:outline-none dark:text-white dark:bg-gray-800 dark:border-gray-700" %>
       </div>
     </div>
   
     <div class="float-right mt-3 flex flex-row space-x-2">
-      <%= link_to failure_text, todos_path, class: "rounded-lg px-2 py-1 text-sm bg-gray-50 text-black block mt-auto hover:bg-gray-100 duration-75 dark:text-white dark:bg-gray-700 dark:hover:bg-gray-800"%>
-      <%= form.submit success_text, class: "rounded-lg px-2 py-1 text-sm bg-blue-600 text-white block mt-auto hover:bg-blue-700 duration-75" %>
+      <%= link_to failure_text, todos_path, class: "rounded-lg px-2 py-1 text-sm bg-gray-50 text-black block mt-auto hover:bg-gray-100 duration-75 dark:text-white dark:bg-gray-700 dark:hover:bg-gray-800 cursor-pointer"%>
+      <%= form.submit success_text, class: "rounded-lg px-2 py-1 text-sm bg-blue-600 text-white block mt-auto hover:bg-blue-700 duration-75 cursor-pointer" %>
     </div>
   </div>
 <% end %>

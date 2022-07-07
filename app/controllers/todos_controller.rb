@@ -1,10 +1,17 @@
 class TodosController < ApplicationController
   before_action :set_todo, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, :except => [:index]
 
   # GET /todos or /todos.json
   def index
-    @todos = Todo.all.select { |todo| !todo.completed }
-    @completed_todos = Todo.all.select { |todo| todo.completed }
+    if current_user
+    @todos = Todo.where(completed: false)
+    @completed_todos = Todo.where(completed: true)
+    else
+      respond_to do |format|
+        format.html { redirect_to new_user_session_path }
+      end
+    end
   end
 
   # GET /todos/new
