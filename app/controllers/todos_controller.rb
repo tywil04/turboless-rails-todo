@@ -15,6 +15,11 @@ class TodosController < ApplicationController
 
   # GET /todos/1/edit
   def edit
+    if @todo.user != current_user
+      respond_to do |format|
+        format.html { redirect_to todos_path }
+      end
+    end
   end
 
   # GEt /todos/1
@@ -41,14 +46,16 @@ class TodosController < ApplicationController
 
   # PATCH/PUT /todos/1 or /todos/1.json
   def update
-    params = todo_params.merge({"user" => current_user});
+    if @todo.user == current_user
+      params = todo_params.merge({"user" => current_user});
 
-    respond_to do |format|
-      if @todo.update(params)
-        format.html { redirect_to todos_path, notice: "Successfully Updated Todo: " + @todo.title }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @todo.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @todo.update(params)
+          format.html { redirect_to todos_path, notice: "Successfully Updated Todo: " + @todo.title }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @todo.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
