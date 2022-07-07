@@ -8,32 +8,40 @@
 <% end %>
 
 <div class="px-[30%] py-[5%] w-full space-y-16 dark:bg-gray-900 flex flex-col flex-grow">
-  <% if @todos != [] %>
-    <div id="todos" class="space-y-3">
-      <div class="flex justify-between items-center">
-        <h1 class="font-bold text-4xl dark:text-white">Uncompleted Todos</h1>
-        <%= link_to 'New', new_todo_path, class: "rounded-lg px-2 py-1 text-sm bg-blue-600 text-white block mt-auto hover:bg-blue-700 duration-75" %>
-      </div>
-
-      <hr class="border-gray-100 dark:border-gray-700"/>
-    
-      <div id="todos" class="w-full space-y-4">
-        <%= render @todos, completed: false %>
-      </div>
+  <div id="todos" class="space-y-3">
+    <div class="flex justify-between items-center">
+      <h1 class="font-bold text-4xl dark:text-white">Uncompleted Todos</h1>
+      <%= link_to 'New', new_todo_path, class: "rounded-lg px-2 py-1 text-sm bg-blue-600 text-white block mt-auto hover:bg-blue-700 duration-75" %>
     </div>
-  <% end %>
 
-  <% if @completed_todos != [] %>
-    <div id="completed_todos" class="space-y-3">
-      <div class="flex justify-between items-center">
-        <h1 class="font-bold text-4xl dark:text-white">Completed Todos</h1>
-      </div>
+    <hr class="border-gray-100 dark:border-gray-700"/>
+  
+    <div id="todos" class="w-full space-y-4">
+      <%= render @todos, completed: false %>
 
-      <hr class="border-gray-100 dark:border-gray-700"/>
-    
-      <div id="todos" class="w-full space-y-4">
-        <%= render @completed_todos, completed: true %>
-      </div>
+      <% if @todos == [] %>
+        <p class="text-sm text-gray-400 py-1 pl-0.5">
+          No uncompleted todos found.
+        </p>
+      <% end %>
     </div>
-  <% end %>
+  </div>
+
+  <div id="completed_todos" class="space-y-3">
+    <div class="flex justify-between items-center">
+      <h1 class="font-bold text-4xl dark:text-white">Completed Todos</h1>
+    </div>
+
+    <hr class="border-gray-100 dark:border-gray-700"/>
+  
+    <div id="todos" class="w-full space-y-4">
+      <%= render @completed_todos, completed: true %>
+
+      <% if @completed_todos == [] %>
+        <p class="text-sm text-gray-400 py-1 pl-0.5">
+          No completed todos found.
+        </p>
+      <% end %>
+    </div>
+  </div>
 </div>
