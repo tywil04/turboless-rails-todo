@@ -4,8 +4,8 @@ class TodosController < ApplicationController
 
   # GET /todos or /todos.json
   def index
-    @todos = Todo.where(completed: false)
-    @completed_todos = Todo.where(completed: true)
+    @todos = Todo.where(completed: false, user: current_user)
+    @completed_todos = Todo.where(completed: true, user: current_user)
   end
 
   # GET /todos/new
@@ -26,7 +26,8 @@ class TodosController < ApplicationController
 
   # POST /todos or /todos.json
   def create
-    @todo = Todo.new(todo_params)
+    params = todo_params.merge({"user" => current_user, "completed" => false});
+    @todo = Todo.new(params)
 
     respond_to do |format|
       if @todo.save
@@ -40,9 +41,10 @@ class TodosController < ApplicationController
 
   # PATCH/PUT /todos/1 or /todos/1.json
   def update
+    params = todo_params.merge({"user" => current_user});
+
     respond_to do |format|
-      puts todo_params
-      if @todo.update(todo_params)
+      if @todo.update(params)
         format.html { redirect_to todos_path, notice: "Successfully Updated Todo: " + @todo.title }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -53,11 +55,17 @@ class TodosController < ApplicationController
 
   # DELETE /todos/1 or /todos/1.json
   def destroy
-    @todo.destroy
+    if @todo.user == current_user
+      @todo.destroy
 
-    respond_to do |format|
-      format.html { redirect_to todos_url, notice: "Succesfully Deleted Todo: " + @todo.title }
-      format.json { head :no_content }
+      respond_to do |format|
+        format.html { redirect_to todos_url, notice: "Succesfully Deleted Todo: " + @todo.title }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to todos_url }
+      end
     end
   end
 
@@ -69,6 +77,6 @@ class TodosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def todo_params
-      params.require(:todo).permit(:title, :body, :completed)
+      params.require(:todo).permit(:title, :body, :completed, :user)
     end
 end
